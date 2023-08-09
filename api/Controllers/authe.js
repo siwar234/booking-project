@@ -1,6 +1,6 @@
 import user from "../models/user.js";
 import bcrypt from "bcryptjs";
-import { createError } from "../../utils/error.js";
+import { createError } from "../utils/error.js";
 import jwt from 'jsonwebtoken';
 export const register = async (req, res, next) => {
   try {
@@ -45,3 +45,6 @@ export const login = async (req, res, next) => {
     next(err);
   }
 };
+
+
+
