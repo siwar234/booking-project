@@ -8,9 +8,8 @@ export const register = async (req, res, next) => {
     const hash = bcrypt.hashSync(req.body.password, salt);
 
     const newuser = new user({
-      username: req.body.username,
-      email: req.body.email,
-      password: hash,
+     ...req.body,
+         password: hash,
     });
 
     await newuser.save();
@@ -40,7 +39,7 @@ export const login = async (req, res, next) => {
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json(otherDetails);
+      .json({details:{...otherDetails},isAdmin});
   } catch (err) {
     next(err);
   }
